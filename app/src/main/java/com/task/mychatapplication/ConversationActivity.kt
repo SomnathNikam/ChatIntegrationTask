@@ -1,98 +1,70 @@
 package com.task.mychatapplication
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
+
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.cometchat.chat.core.CometChat
-import com.cometchat.chat.exceptions.CometChatException
+
+import com.cometchat.chat.constants.CometChatConstants
+import com.cometchat.chat.models.Conversation
 import com.cometchat.chat.models.Group
 import com.cometchat.chat.models.User
-import com.cometchat.chatuikit.messagecomposer.CometChatMessageComposer
-import com.cometchat.chatuikit.messagelist.CometChatMessageList
+import com.cometchat.chatuikit.conversations.CometChatConversations
+/**
+ * Activity to display a list of conversations using CometChat UI Kit.
+ * Allows users to click on a conversation and navigate to the chat screen.
+ */
 
 class ConversationActivity : AppCompatActivity() {
-//    private lateinit var messageHeader: CometChatMessageHeader
-    private lateinit var messageList: CometChatMessageList
-    private lateinit var messageComposer: CometChatMessageComposer
 
-    private var uid: String? = null
-    private var guid: String? = null
+    private lateinit var conversationsView: CometChatConversations
 
-    private val TAG = "MessageActivity"
-
+    /**
+     * Called when the activity is first created.
+     * Sets up the UI and listeners.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
-        setContentView(R.layout.activity_message)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_conversation)
 
-        initializeViews()
-        setupChat()
-        setupHeaderBackButton()
+        initView()
+        setListeners()
     }
 
-    private fun initializeViews() {
-//        messageHeader = findViewById(R.id.message_header)
-        messageList = findViewById(R.id.message_list)
-        messageComposer = findViewById(R.id.message_composer)
+    /**
+     * Initializes the view components used in this activity.
+     * Finds the CometChatConversations view by its ID.
+     */
+    private fun initView() {
+        conversationsView = findViewById(R.id.conversation_view)
     }
-
-    private fun setupChat() {
-        uid = intent.getStringExtra("uid")
-        guid = intent.getStringExtra("guid")
-
-        when {
-            uid != null -> setupUserChat(uid!!)
-            guid != null -> setupGroupChat(guid!!)
-            else -> {
-                Log.e(TAG, "No user ID or group ID provided")
-                showError("Missing user ID or group ID")
-                finish()
-            }
+    /**
+     * Sets up listeners for the views.
+     * Handles click events on conversations to open the respective chat.
+     */
+    private fun setListeners() {
+        conversationsView.setOnItemClick { _, _, conversation ->
+            startMessageActivity(conversation)
         }
     }
-
-    private fun setupUserChat(userId: String) {
-        CometChat.getUser(userId, object : CometChat.CallbackListener<User>() {
-            override fun onSuccess(user: User) {
-                Log.d(TAG, "Successfully loaded user: ${user.uid}")
-//                messageHeader.setUser(user)
-                messageList.setUser(user)
-                messageComposer.setUser(user)
+/**
+ * Starts the MessageActivity based on the selected conversation.
+ */
+    private fun startMessageActivity(conversation: Conversation) {
+        val intent = Intent(this, MessageActivity::class.java).apply {
+            when (conversation.conversationType) {
+                CometChatConstants.CONVERSATION_TYPE_GROUP -> {
+                    val group = conversation.conversationWith as Group
+                    putExtra("guid", group.guid)
+                }
+                else -> {
+                    val user = conversation.conversationWith as User
+                    putExtra("uid", user.uid)
+                }
             }
-
-            override fun onError(e: CometChatException?) {
-                Log.e(TAG, "Error loading user: ${e?.message}")
-                showError("Could not find user: ${e?.message}")
-                finish()
-            }
-        })
-    }
-
-    private fun setupGroupChat(groupId: String) {
-        CometChat.getGroup(groupId, object : CometChat.CallbackListener<Group>() {
-            override fun onSuccess(group: Group) {
-                Log.d(TAG, "Successfully loaded group: ${group.guid}")
-//                messageHeader.setGroup(group)
-                messageList.setGroup(group)
-                messageComposer.setGroup(group)
-            }
-
-            override fun onError(e: CometChatException?) {
-                Log.e(TAG, "Error loading group: ${e?.message}")
-                showError("Could not find group: ${e?.message}")
-                finish()
-            }
-        })
-    }
-
-    private fun setupHeaderBackButton() {
-//        messageHeader.setOnBackButtonPressed {
-//            finish()
-//        }
-    }
-
-    private fun showError(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        }
+        startActivity(intent)
     }
 }

@@ -6,44 +6,32 @@ import com.cometchat.chat.core.AppSettings
 import com.cometchat.chat.core.CometChat
 import com.cometchat.chat.exceptions.CometChatException
 
-/*class MyApplication:Application() {
-    val appID: String = "APP_ID" // Replace with your App ID
-    val region: String = "REGION" // Replace with your App Region ("eu" or "us")
-
-    val appSettings = AppSettings.AppSettingsBuilder()
-        .subscribePresenceForAllUsers()
-        .setRegion(region)
-        .autoEstablishSocketConnection(true)
-        .build()
-
-//    CometChat.init(
-//    this,
-//    appID,
-//    appSettings,
-//    object : CometChat.CallbackListener<String>() {
-//        override fun onSuccess(p0: String?) {
-//            Log.d(TAG, "Initialization completed successfully")
-//        }
-//
-//        override fun onError(p0: CometChatException?) {
-//            Log.d(TAG, "Initialization failed with exception: " + p0?.message)
-//        }
-//    }
-//    )
-
-}*/
+/**
+ * Custom [Application] class used to initialize CometChat SDK when the app starts.
+ */
 class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        /**
+         * Called when the application is starting, before any other application objects have been created.
+         * Initializes CometChat SDK with the provided App ID and Region.
+         */
          val appID = "2738108fe25d4e55" // Replace with your App ID
          val region = "in" // Replace with your App Region
+
+        // Build the AppSettings object with desired configurations
         val settings = AppSettings.AppSettingsBuilder()
             .subscribePresenceForAllUsers()
             .setRegion(region)
             .build()
 
-        CometChat.init(this, appID, settings, object : CometChat.CallbackListener<String>() {
+        // Initialize CometChat SDK
+        CometChat.init(
+            this,
+            appID,
+            settings,
+            object : CometChat.CallbackListener<String>() {
             override fun onSuccess(p0: String?) {
                 Log.d("CometChatInit", "Initialization completed successfully")
             }

@@ -13,6 +13,11 @@ import com.cometchat.chat.models.User
 import com.cometchat.chatuikit.messagecomposer.CometChatMessageComposer
 import com.cometchat.chatuikit.messagelist.CometChatMessageList
 
+
+/**
+ * Activity that handles one-to-one and group messaging functionality using CometChat.
+ * It displays the message list and a composer to send new messages.
+ */
 class MessageActivity : AppCompatActivity() {
 //    private lateinit var messageHeader: CometChatMessageHeader
     private lateinit var messageList: CometChatMessageList
@@ -38,7 +43,10 @@ class MessageActivity : AppCompatActivity() {
         messageList = findViewById(R.id.message_list)
         messageComposer = findViewById(R.id.message_composer)
     }
-
+    /**
+     * Sets up the chat session by checking whether a user ID or group ID was passed.
+     * Initiates either a user chat or a group chat accordingly.
+     */
     private fun setupChat() {
         uid = intent.getStringExtra("uid")
         guid = intent.getStringExtra("guid")
@@ -53,7 +61,9 @@ class MessageActivity : AppCompatActivity() {
             }
         }
     }
-
+/**
+ * Sets up a one-to-one chat with a user.
+ */
     private fun setupUserChat(userId: String) {
         CometChat.getUser(userId, object : CometChat.CallbackListener<User>() {
             override fun onSuccess(user: User) {
@@ -70,7 +80,9 @@ class MessageActivity : AppCompatActivity() {
             }
         })
     }
-
+/**
+ * Sets up a group chat with a group.
+ */
     private fun setupGroupChat(groupId: String) {
         CometChat.getGroup(groupId, object : CometChat.CallbackListener<Group>() {
             override fun onSuccess(group: Group) {
@@ -87,7 +99,10 @@ class MessageActivity : AppCompatActivity() {
             }
         })
     }
-
+    /**
+     * Sets up the back button functionality for the message header (if available).
+     * Clicking the back button finishes the current activity.
+     */
     private fun setupHeaderBackButton() {
        /* messageHeader.setOnBackButtonPressed {
             finish()

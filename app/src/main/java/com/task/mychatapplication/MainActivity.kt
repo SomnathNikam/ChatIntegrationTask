@@ -11,7 +11,10 @@ import com.cometchat.chat.exceptions.CometChatException
 import com.cometchat.chat.models.User
 import com.cometchat.chatuikit.shared.cometchatuikit.CometChatUIKit
 import com.cometchat.chatuikit.shared.cometchatuikit.UIKitSettings
-
+/*
+ This Main Activity that handles the flow of the app
+ It is the starting Screen 
+ */
 class MainActivity : ComponentActivity() {
 
     private val TAG = "MainActivity"
@@ -43,14 +46,13 @@ class MainActivity : ComponentActivity() {
         })
     }
 
+    // This login User function use predefined UID
     private fun loginUser() {
         CometChatUIKit.login("cometchat-uid-1", object : CometChat.CallbackListener<User>() {
             override fun onSuccess(user: User) {
 
-                // Launch One-to-One or Group Chat Screen
-                val intent = Intent(this@MainActivity, MessageActivity::class.java)
-                intent.putExtra("uid", "cometchat-uid-1")
-                startActivity(intent)
+                // Launch Conversation List + Message View (Split-Screen Style)
+                startActivity(Intent(this@MainActivity, ConversationActivity::class.java))
             }
 
             override fun onError(e: CometChatException) {
@@ -60,7 +62,6 @@ class MainActivity : ComponentActivity() {
         })
     }
 }
-
 
 
 
