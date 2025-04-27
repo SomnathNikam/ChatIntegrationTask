@@ -1,0 +1,83 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="CometChatTheme.DayNight">
+
+        <item name="cometchatPrimaryColor">#F76808</item>
+        <item name="cometchatMessageHeaderStyle">@style/CustomMessageHeaderStyle</item>
+
+<!--        <item name="cometchatMessageListStyle">@style/CustomCometChatMessageListStyle</item>-->
+  <!--      <item name="cometchatFontBold">@font/times_new_roman_bold</item>
+        <item name="cometchatFontMedium">@font/times_new_roman</item>
+        <item name="cometchatFontRegular">@font/times_new_roman</item>-->
+        <!-- Primary brand colors -->
+<!--        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        &lt;!&ndash; Secondary brand colors &ndash;&gt;
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        &lt;!&ndash; Background and surface colors &ndash;&gt;
+        <item name="android:colorBackground">@color/white</item>
+&lt;!&ndash;        <item name="colorBackground">@color/white</item>&ndash;&gt;
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/black</item>
+
+        &lt;!&ndash; Card style support &ndash;&gt;
+        <item name="cardViewStyle">@style/Widget.MaterialComponents.CardView</item>
+
+        &lt;!&ndash; MaterialCardView specific attributes &ndash;&gt;
+        <item name="materialCardViewStyle">@style/CustomMaterialCardViewStyle</item>
+
+        &lt;!&ndash; Optional: font family and other UI details &ndash;&gt;
+&lt;!&ndash;        <item name="android:fontFamily">@font/roboto</item>&ndash;&gt;
+        <item name="textAppearanceHeadline6">@style/TextAppearance.MaterialComponents.Headline6</item>
+
+    </style>
+
+    &lt;!&ndash; Custom style for MaterialCardView &ndash;&gt;
+    <style name="CustomMaterialCardViewStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="strokeColor">@color/gray</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cardElevation">2dp</item>
+&lt;!&ndash;
+<item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialComponents.Card</item>&ndash;&gt;  -->
+    </style>
+  <!--  <style name="CustomOutgoingMessageBubbleStyle" parent="CometChatOutgoingMessageBubbleStyle">
+        <item name="cometchatMessageBubbleBackgroundColor">#F76808</item>
+    </style>
+
+    <style name="CustomCometChatMessageListStyle" parent="CometChatMessageListStyle">
+        <item name="cometchatMessageListBackgroundColor">#FEEDE1</item>
+        <item name="cometchatMessageListOutgoingMessageBubbleStyle">@style/CustomOutgoingMessageBubbleStyle</item>
+    </style>-->
+
+
+    <style name="CustomAvatarStyle" parent="CometChatAvatarStyle">
+        <item name="cometchatAvatarStrokeRadius">8dp</item>
+        <item name="cometchatAvatarBackgroundColor">#FBAA75</item>
+    </style>
+
+    <style name="CustomUsersStyle" parent="CometChatUsersStyle">
+        <item name="cometchatUsersAvatarStyle">@style/CustomAvatarStyle</item>
+        <item name="cometchatUsersSeparatorColor">#F76808</item>
+        <item name="cometchatUsersTitleTextColor">#F76808</item>
+    </style>
+
+    <style name="CustomCallButtonStyle" parent="CometChatCallButtonsStyle">
+        <item name="cometchatCallButtonsVideoCallIconTint">#F76808</item>
+        <item name="cometchatCallButtonsVoiceCallIconTint">#F76808</item>
+    </style>
+
+    <style name="CustomMessageHeaderStyle" parent="CometChatMessageHeaderStyle">
+        <item name="cometchatMessageHeaderTitleTextColor">#F76808</item>
+        <item name="cometchatMessageHeaderAvatarStyle">@style/CustomAvatarStyle</item>
+        <item name="cometchatMessageHeaderCallButtonsStyle">@style/CustomCallButtonStyle</item>
+    </style>
+
+
+</resources>

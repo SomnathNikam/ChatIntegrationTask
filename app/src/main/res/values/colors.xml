@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="colorBackground">#FFFFFFFF</color>
+
+    <color name="gray">#CCCCCC</color>
+    <color name="purple_500">#6200EE</color>
+    <color name="purple_700">#3700B3</color>
+    <color name="teal_200">#03DAC5</color>
+    <color name="teal_700">#018786</color>
+
+
+
+        <color name="cometchat_color_primary">#6852D6</color>
+        <color name="cometchat_color_neutral_50">#FFFFFF</color>
+        <color name="cometchat_color_neutral_900">#141414</color>
+        <color name="cometchat_color_text_primary">@color/cometchat_color_neutral_900</color>
+        <!-- Other color definitions -->
+</resources>
